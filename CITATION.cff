@@ -21,8 +21,12 @@ authors:
     orcid: "https://orcid.org/0000-0001-6165-7389"
     affiliation: "Northwest Missouri State University, School of Computer Science and Information Systems, Maryville, MO, USA"
 
-repository-code: "https://github.com/denisecase/datafun-06-applied"
-url: "https://github.com/denisecase/datafun-06-applied"
+  - family-names: Carne
+    given-names: Jereme
+    affiliation: "Northwest Missouri State University
+
+repository-code: "https://github.com/j-carne/datafun-06-applied"
+url: "https://github.com/j-carne/datafun-06-applied"
 license: MIT
 
 abstract: >
