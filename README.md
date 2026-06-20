@@ -1,67 +1,40 @@
 # datafun-06-applied
 
-[![Workflow Guide](https://img.shields.io/badge/Pro--Guide-pro--analytics--02-green)](https://denisecase.github.io/pro-analytics-02/workflow-b-apply-example-project/)
 [![Python 3.14](https://img.shields.io/badge/python-3.14%2B-blue?logo=python)](./pyproject.toml)
 [![MIT](https://img.shields.io/badge/license-see%20LICENSE-yellow.svg)](./LICENSE)
 
 > Professional Python project: applied data analytics.
 
-## Project Goal
+## What This Project Does
 
-In this project, you perform a novel **Exploratory Data Analysis (EDA)**
-using Jupyter notebooks or Python modules (your preference).
-The addition of related data and/or SQL may be included and is optional.
+This project performs Exploratory Data Analysis (EDA) using Jupyter notebooks.
+It includes two notebooks:
 
-Your goal: choose a new dataset, and explore it:
-run checks, view distributions, identify missing values or outliers.
-Create and present a custom project to explore a different tabular dataset.
+- **eda_case.ipynb** — the provided OWID CO2 emissions example, modified to add
+  a time-trend chart showing CO2 per capita over time by country
+- **eda_dynon.ipynb** — a custom EDA applying the same workflow to real Dynon
+  avionics flight data, grouped by altitude band
 
-For data suggestions, please see [data/raw/README.md](data/raw/README.md).
+Both notebooks follow the same structure: load data, inspect, clean, compute
+descriptive statistics, build a correlation matrix, and visualize relationships.
 
-## Examples
+## Setup
 
-The project includes an additional EDA on a real-world dataset.
-Between this and the Module 4 example,
-you should be able to see what parts are similar
-(the general outline and workflow) and what changes with data.
-The two projects together help create an appreciation
-for the value of **reusable functions**.
+```shell
+git clone https://github.com/j-carne/datafun-06-applied
+cd datafun-06-applied
+uv sync --extra dev --extra docs --upgrade
+uvx pre-commit install
+```
 
-## Working Files
+## How to Run
 
-You'll work with these areas:
+Open either notebook in VS Code and select the `.venv` kernel, then **Run All**:
 
-- **data/raw** - raw data for exploration
-- **docs/** - project narrative and documentation
-- **src/** - supporting Python package modules
-- **notebooks/** - interactive analysis
-- **pyproject.toml** - update authorship & links
-- **zensical.toml** - update authorship & links
+- `notebooks/eda_case.ipynb`
+- `notebooks/eda_dynon.ipynb`
 
-## Instructions (pro-analytics-02)
-
-Follow the
-[step-by-step workflow guide](https://denisecase.github.io/pro-analytics-02/workflow-b-apply-example-project/)
-to complete:
-
-1. Phase 1. **Start & Run**
-2. Phase 2. **Change Authorship**
-3. Phase 3. **Read & Understand**
-4. Phase 4. **Modify**
-5. Phase 5. **Apply**
-
-## Challenges
-
-Challenges are expected.
-Sometimes instructions may not quite match your operating system.
-When issues occur, share screenshots, error messages, and details about what you tried.
-Working through issues is part of implementing professional projects.
-
-## Success
-
-After completing Phase 1. **Start & Run**, you'll have your own GitHub project,
-with the example notebook executed and committed,
-and running the example script will print out:
+Both notebooks end with:
 
 ```shell
 ========================
@@ -69,139 +42,70 @@ Executed successfully!
 ========================
 ```
 
-A new file `project.log` will appear in the root project folder.
+A `project.log` file will appear in the root project folder with detailed run output.
 
-## Command Reference
+## OWID CO2 Example — Key Results
 
-<details>
-<summary>Show command reference</summary>
+Correlation matrix highlights:
 
-### In a machine terminal (open in your `Repos` folder)
+| Variables | Correlation | Interpretation |
+|-----------|-------------|----------------|
+| co2 & gdp | 0.98 | Larger economies emit more total CO2 |
+| co2 & population | 0.95 | Larger populations emit more total CO2 |
+| co2_per_capita & gdp | -0.05 | Wealth doesn't predict individual emissions |
 
-After you get a copy of this repo in your own GitHub account,
-open a machine terminal in your `Repos` folder:
+Per-capita CO2 by country (2022):
 
-```shell
-# Updated the gitclone to use my repo
-git clone https://github.com/j-carne/datafun-06-applied
+| Country | CO2 per Capita |
+|---------|-----------------|
+| United States | 21.4 |
+| Canada | 18.3 |
+| Germany | 8.4 |
+| World Average | 4.6 |
+| India | 1.3 |
 
-cd datafun-06-applied
-code .
-```
+**Custom modification:** Added a line chart tracking CO2 per capita over time
+for each country, revealing that the US and Canada have remained consistently
+highest throughout the dataset, while China's per-capita emissions rose steadily.
 
-### In a VS Code terminal
+## Dynon Flight Data — Custom Project
 
-These are listed for convenience.
-For best results, follow the detailed instructions in
-[pro-analytics-02 guide](https://denisecase.github.io/pro-analytics-02/).
+Real avionics data recorded during a general aviation flight: 14,131 samples
+covering pressure altitude, indicated airspeed, vertical speed, OAT, and RPM.
+Grouped by altitude band (2000-4000 ft, 4000-6000 ft, Above 6000 ft).
 
-```shell
-uv self update
-uv python pin 3.14
-uv lock --upgrade
-uv sync --extra dev --extra docs --upgrade
+### Correlation Matrix
 
-uvx pre-commit install
+| Variables | Correlation |
+|-----------|-------------|
+| RPM & Airspeed | 0.89 |
+| Altitude & OAT | -0.66 |
+| Altitude & RPM | 0.55 |
+| Altitude & Airspeed | 0.49 |
 
-git add -A
-uvx pre-commit run --all-files
-# repeat if changes were made
-uvx pre-commit run --all-files
+### Key Finding
 
-# run the example module and verify the environment (.venv/)
-uv run python -m datafun.app_case
+Altitude and airspeed show only a **moderate** correlation (0.49) — weaker than
+expected. RPM is a far stronger predictor of airspeed (0.89). The scatter plot
+shows each altitude band spans a wide range of airspeeds, suggesting flight
+phase (climb vs. cruise) drives airspeed more than altitude itself.
 
-# do chores
-uv run python -m pyright
-uv run python -m pytest
-uv run python -m zensical build
+![Altitude vs Airspeed Scatter Plot](./docs/images/altitude_vs_airspeed.png)
 
-# save progress
-git add -A
-git commit -m "update"
-git push -u origin main
-```
-
-</details>
-
-## Notes
-
-- Use the **UP ARROW** and **DOWN ARROW** in the terminal to scroll through past commands.
-- Use `CTRL+f` to find (and replace) text within a file.
-- You do not need to add to or modify `tests/`. They are provided for example only.
-- Many files are silent helpers. Explore as you like, but nothing is required.
-- You do NOT not to understand everything; understanding builds naturally over time.
-
-## Troubleshooting >>>
-
-If you see something like this in your terminal: `>>>` or `...`
-You accidentally started Python interactive mode.
-It happens.
-Press `Ctrl+c` (both keys together) or `Ctrl+Z` then `Enter` on Windows.
-
-## Example Output (Can Remove this Section after You Verify)
-
-```shell
- | INFO | P06 | --- Section 9: Summary and next steps ---
- | INFO | P06 | ========================
- | INFO | P06 | SUMMARY
- | INFO | P06 | ========================
- | INFO | P06 | Dataset: owid-co2-data-subset
- | INFO | P06 | Original rows: 350
- | INFO | P06 | Clean rows:    308
- | INFO | P06 | Groups found in country: ['Brazil', 'Canada', 'China', 'France', 'Germany', 'India', 'Japan', 'United Kingdom', 'United States', 'World']
- | INFO | P06 | ======================
- | INFO | P06 | Review the results.
- | INFO | P06 | Determine the strongest correlations.
- | INFO | P06 | ======================
- | INFO | P06 | Look for interesting patterns in the charts.
- | INFO | P06 | Repeat the process, exploring additional angles.
- | INFO | P06 | After finding interesting insights, conclude your analysis.
- | INFO | P06 | ======================
- | INFO | P06 | Include instructions and specifics in your README.md file.
- | INFO | P06 | Write up your narrative on your docs/index.md file.
- | INFO | P06 | Include your next step suggestions for further analysis or modeling.
- | INFO | P06 | ======================
- | INFO | P06 | ----- in a script, call plt.show() once at the end to display all charts -----
- | INFO | P06 | ----- in a script, close the chart windows (with the close button) to continue  -----
- | INFO | P06 | EDA workflow complete
- | INFO | P06 | IMPORTANT: This script creates chart windows.
- | INFO | P06 | Close any chart windows and terminate this process with CTRL+c as needed.
- | INFO | P06 | ========================
- | INFO | P06 | Executed successfully!
- | INFO | P06 | ========================
-```
-
-## Findings and Visuals
-
-Take screenshots of your charts and provide them here with a discussion.
-In Markdown, display a figure by using:
-an exclamation mark immediately followed by square brackets containing a useful caption
-immediately followed by parentheses containing the relative path to your figure.
-Note: When you start typing the path with a dot (.) for "here, in this directory",
-the IDE may help complete the path.
-
-In your custom project, follow this example, but
-
-- your figures and narrative should reflect your work,
-- this `README.md` should include your commands, process, and visuals, and
-- `docs/index.md` should include your narrative.
-
-Remove unnecessary instructional comments in your custom files.
-
-Update these figures to present interesting results from your custom project:
-
-![Correlation Heatmap](./docs/images/Figure_1.png)
-
-![Provide a Useful Caption](./docs/images/Figure_2.png)
-
-![Provide a Useful Caption](./docs/images/Figure_3.png)
+OAT showed a strong negative correlation with altitude (-0.66), consistent
+with the standard atmospheric lapse rate — a good sanity check that the data
+and methodology are sound.
 
 ## Project Documentation
 
-Additional instructions, terms, and project notes:
-
 [docs/index.md](docs/index.md)
+
+## Notes
+
+- `data/raw/dynon_data.csv` is kept local and not pushed to GitHub
+- Use the **UP ARROW** and **DOWN ARROW** in the terminal to scroll through past commands
+- If you see `>>>` or `...` in your terminal, you accidentally started Python interactive
+  mode — press `Ctrl+c` or `Ctrl+Z` then `Enter` on Windows
 
 ## Citation
 

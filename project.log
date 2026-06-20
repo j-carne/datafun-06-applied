@@ -502,3 +502,152 @@ gdp             0.263472  0.977864       -0.053033    0.940825  1.000000
 2026-06-20 16:28:17 | INFO | P06-NB | ========================
 2026-06-20 16:28:17 | INFO | P06-NB | Executed successfully!
 2026-06-20 16:28:17 | INFO | P06-NB | ========================
+2026-06-20 16:42:36 | INFO | P06-DYNON | === RUN START ===
+2026-06-20 16:42:36 | INFO | P06-DYNON | project=P06-DYNON
+2026-06-20 16:42:36 | INFO | P06-DYNON | repo_dir=datafun-06-applied
+2026-06-20 16:42:36 | INFO | P06-DYNON | python=3.14.5
+2026-06-20 16:42:36 | INFO | P06-DYNON | os=Windows 11
+2026-06-20 16:42:36 | INFO | P06-DYNON | shell=powershell
+2026-06-20 16:42:36 | INFO | P06-DYNON | cwd=notebooks
+2026-06-20 16:42:36 | INFO | P06-DYNON | github_actions=False
+2026-06-20 16:42:36 | INFO | P06-DYNON | Imports complete.
+2026-06-20 16:42:36 | INFO | P06-DYNON | Loading dataset: dynon_data
+2026-06-20 16:42:36 | INFO | P06-DYNON | Loaded: 14131 rows, 6 columns
+2026-06-20 16:42:36 | INFO | P06-DYNON | Previewing first few rows of the dataset
+2026-06-20 16:42:36 | INFO | P06-DYNON | Column names
+2026-06-20 16:42:36 | INFO | P06-DYNON | Building starter data dictionary
+2026-06-20 16:42:36 | DEBUG | P06-DYNON | 
+               column    dtype  missing_count  missing_pct
+0   pressure_altitude  float64              6         0.04
+1  indicated_airspeed  float64              6         0.04
+2      vertical_speed  float64              6         0.04
+3                 oat  float64              4         0.03
+4               rpm_l  float64              9         0.06
+5       altitude_band      str              0         0.00
+2026-06-20 16:42:36 | INFO | P06-DYNON | Missing values per column:
+2026-06-20 16:42:36 | INFO | P06-DYNON | pressure_altitude     6
+indicated_airspeed    6
+vertical_speed        6
+oat                   4
+rpm_l                 9
+altitude_band         0
+dtype: int64
+2026-06-20 16:42:36 | INFO | P06-DYNON | Checking missing values per column
+2026-06-20 16:42:36 | DEBUG | P06-DYNON | 
+rpm_l                 9
+pressure_altitude     6
+indicated_airspeed    6
+vertical_speed        6
+oat                   4
+altitude_band         0
+dtype: int64
+2026-06-20 16:42:36 | INFO | P06-DYNON | Duplicate rows detected: 174
+2026-06-20 16:42:36 | INFO | P06-DYNON | Call describe() for numeric columns
+2026-06-20 16:42:36 | DEBUG | P06-DYNON | 
+       pressure_altitude  indicated_airspeed  vertical_speed           oat         rpm_l
+count       14125.000000        14125.000000    14125.000000  14127.000000  14122.000000
+mean         5143.793628           86.116191       -0.801912     14.915835   1945.833522
+std          1064.579121           51.862339      572.849449      5.471995    722.247200
+min          3967.000000            0.000000    -6426.000000      7.000000      0.000000
+25%          4163.000000           37.500000     -205.000000     10.000000   1518.000000
+50%          4851.000000           94.000000       -7.000000     13.000000   2401.500000
+75%          5994.000000          133.100000      110.000000     21.000000   2453.000000
+max          7454.000000          165.800000     5366.000000     23.000000   2742.000000
+
+2026-06-20 16:42:36 | DEBUG | P06-DYNON | Columns required to be non-missing: ['pressure_altitude', 'indicated_airspeed', 'vertical_speed', 'oat', 'rpm_l', 'altitude_band']
+2026-06-20 16:42:36 | INFO | P06-DYNON | Original rows: 14131
+2026-06-20 16:42:36 | INFO | P06-DYNON | Clean rows:    14122
+2026-06-20 16:42:36 | INFO | P06-DYNON | Rows dropped:  9
+2026-06-20 16:42:36 | INFO | P06-DYNON | --------------- Manual statistics ---------------
+2026-06-20 16:42:36 | DEBUG | P06-DYNON | indicated_airspeed Statistics (using numpy):
+2026-06-20 16:42:36 | DEBUG | P06-DYNON |   Mean: 86.13
+2026-06-20 16:42:36 | DEBUG | P06-DYNON |   Std Dev: 51.85
+2026-06-20 16:42:36 | DEBUG | P06-DYNON |   Min: 0.00
+2026-06-20 16:42:36 | DEBUG | P06-DYNON |   Max: 165.80
+2026-06-20 16:42:36 | DEBUG | P06-DYNON |   Range: 165.80
+2026-06-20 16:42:36 | INFO | P06-DYNON | Computing overall descriptive statistics
+2026-06-20 16:42:36 | DEBUG | P06-DYNON | 
+                      count         mean          std     min       25%     50%     75%     max
+pressure_altitude   14122.0  5144.005311  1064.593063  3967.0  4163.250  4851.0  5994.0  7454.0
+indicated_airspeed  14122.0    86.134485    51.852655     0.0    37.775    94.0   133.1   165.8
+vertical_speed      14122.0    -0.796063   572.909404 -6426.0  -205.000    -7.0   110.0  5366.0
+oat                 14122.0    14.916796     5.472719     7.0    10.000    13.0    21.0    23.0
+rpm_l               14122.0  1945.833522   722.247200     0.0  1518.000  2401.5  2453.0  2742.0
+2026-06-20 16:42:36 | INFO | P06-DYNON | --------------- Using pandas groupby() and agg() ---------------
+2026-06-20 16:42:36 | INFO | P06-DYNON | Computing descriptive statistics by group
+2026-06-20 16:42:36 | DEBUG | P06-DYNON | 
+              pressure_altitude                                          indicated_airspeed                         \
+                          count         mean         std     min     max              count        mean        std   
+altitude_band                                                                                                        
+2000-4000 ft               1025  3978.542439    8.866435  3967.0  3999.0               1025    9.422829  20.091509   
+4000-6000 ft               9572  4663.538654  483.354479  4000.0  5998.0               9572   86.782125  54.697306   
+Above 6000 ft              3525  6787.587234  427.404713  6000.0  7454.0               3525  106.682071  19.897551   
+
+                           vertical_speed                                          oat                             \
+                min    max          count       mean         std     min     max count       mean       std   min   
+altitude_band                                                                                                       
+2000-4000 ft    0.0   96.7           1025  -4.013659   72.376065  -494.0   399.0  1025  22.230244  0.717841  21.0   
+4000-6000 ft    0.0  165.8           9572  -4.639992  642.746828 -6426.0  5366.0  9572  16.439720  4.596726   9.0   
+Above 6000 ft  74.0  147.8           3525  10.577589  437.621689 -1477.0  4602.0  3525   8.654752  1.181684   7.0   
+
+                    rpm_l                                           
+                max count         mean         std     min     max  
+altitude_band                                                       
+2000-4000 ft   23.0  1025  1096.642927  520.244894     0.0  2692.0  
+4000-6000 ft   23.0  9572  1886.310280  765.688609     0.0  2742.0  
+Above 6000 ft  19.0  3525  2354.394326  181.586585  1794.0  2547.0  
+2026-06-20 16:42:36 | INFO | P06-DYNON | --------------- Improving the output ---------------
+2026-06-20 16:42:36 | DEBUG | P06-DYNON | 
+                                  count         mean         std     min     max
+altitude_band                                                                   
+2000-4000 ft  pressure_altitude    1025  3978.542439    8.866435  3967.0  3999.0
+              indicated_airspeed   1025     9.422829   20.091509     0.0    96.7
+              vertical_speed       1025    -4.013659   72.376065  -494.0   399.0
+              oat                  1025    22.230244    0.717841    21.0    23.0
+              rpm_l                1025  1096.642927  520.244894     0.0  2692.0
+4000-6000 ft  pressure_altitude    9572  4663.538654  483.354479  4000.0  5998.0
+              indicated_airspeed   9572    86.782125   54.697306     0.0   165.8
+              vertical_speed       9572    -4.639992  642.746828 -6426.0  5366.0
+              oat                  9572    16.439720    4.596726     9.0    23.0
+              rpm_l                9572  1886.310280  765.688609     0.0  2742.0
+Above 6000 ft pressure_altitude    3525  6787.587234  427.404713  6000.0  7454.0
+              indicated_airspeed   3525   106.682071   19.897551    74.0   147.8
+              vertical_speed       3525    10.577589  437.621689 -1477.0  4602.0
+              oat                  3525     8.654752    1.181684     7.0    19.0
+              rpm_l                3525  2354.394326  181.586585  1794.0  2547.0
+2026-06-20 16:42:36 | INFO | P06-DYNON | Computing correlation matrix for numeric columns
+2026-06-20 16:42:36 | INFO | P06-DYNON | 
+Correlation matrix:
+2026-06-20 16:42:36 | DEBUG | P06-DYNON | 
+                    pressure_altitude  indicated_airspeed  vertical_speed       oat     rpm_l
+pressure_altitude            1.000000            0.485857        0.016660 -0.662810  0.547036
+indicated_airspeed           0.485857            1.000000        0.038264  0.064295  0.886201
+vertical_speed               0.016660            0.038264        1.000000  0.054934  0.131456
+oat                         -0.662810            0.064295        0.054934  1.000000 -0.062411
+rpm_l                        0.547036            0.886201        0.131456 -0.062411  1.000000
+2026-06-20 16:42:36 | INFO | P06-DYNON | ---------Visualize Correlation Matrix as a Heatmap---------------
+2026-06-20 16:42:36 | INFO | P06-DYNON | ---- Creating Scatter Plot to see Relationships ------
+2026-06-20 16:42:36 | INFO | P06-DYNON | ----   Use clean dataframe ---------------------------
+2026-06-20 16:42:36 | INFO | P06-DYNON | ----   Set x to Pressure Altitude (ft) -----------------------
+2026-06-20 16:42:36 | INFO | P06-DYNON | ----   Set y to Indicated Airspeed (knots) --------------------------
+2026-06-20 16:42:36 | INFO | P06-DYNON | ----   Set the hue (color mapping) to the group column --
+2026-06-20 16:42:37 | INFO | P06-DYNON | ------- Creating another chart -------
+2026-06-20 16:42:37 | INFO | P06-DYNON | ------ Creating Box Plot to see Distribution: ---------
+2026-06-20 16:42:37 | INFO | P06-DYNON | ------   Use clean dataframe --------------------------
+2026-06-20 16:42:37 | INFO | P06-DYNON | ------   Set x to the group column --------------------
+2026-06-20 16:42:37 | INFO | P06-DYNON | ------   Set y to Indicated Airspeed (knots) ----------------------
+2026-06-20 16:42:37 | INFO | P06-DYNON | ========================
+2026-06-20 16:42:37 | INFO | P06-DYNON | SUMMARY
+2026-06-20 16:42:37 | INFO | P06-DYNON | ========================
+2026-06-20 16:42:37 | INFO | P06-DYNON | Dataset: dynon_data
+2026-06-20 16:42:37 | INFO | P06-DYNON | Original rows: 14131
+2026-06-20 16:42:37 | INFO | P06-DYNON | Clean rows:    14122
+2026-06-20 16:42:37 | INFO | P06-DYNON | Groups found in altitude_band: ['2000-4000 ft', '4000-6000 ft', 'Above 6000 ft']
+2026-06-20 16:42:37 | INFO | P06-DYNON | ======================
+2026-06-20 16:42:37 | INFO | P06-DYNON | Review the results.
+2026-06-20 16:42:37 | INFO | P06-DYNON | Determine the strongest correlations.
+2026-06-20 16:42:37 | INFO | P06-DYNON | ======================
+2026-06-20 16:42:37 | INFO | P06-DYNON | EDA workflow complete
+2026-06-20 16:42:37 | INFO | P06-DYNON | ========================
+2026-06-20 16:42:37 | INFO | P06-DYNON | Executed successfully!
+2026-06-20 16:42:37 | INFO | P06-DYNON | ========================

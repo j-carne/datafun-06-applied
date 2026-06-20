@@ -25,6 +25,9 @@ dependencies = [
     "matplotlib" # plotting library for static, animated, and interactive visualizations in Python
 ]
 
+[project.urls]
+Repository = "https://github.com/j-carne/datafun-06-applied"
+Homepage = "https://github.com/j-carne/datafun-06-applied"
 
 [project.optional-dependencies]
 dev = [

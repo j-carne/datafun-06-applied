@@ -187,3 +187,6 @@ __pycache__/
 # ALT: Comment if logs must be inspected or validated.
 # *.log
 logs/
+
+# Dynon file too large
+data/raw/dynon_data.csv
